@@ -1,7 +1,7 @@
 FROM python:3.10
 USER root
 
-WORKDIR /tmp
+WORKDIR /var/app
 
 RUN apt-get update
 RUN apt-get -y install locales && \
@@ -12,7 +12,7 @@ ENV LC_ALL ja_JP.UTF-8
 ENV TZ JST-9
 ENV TERM xterm
 
-COPY ./app/tweetsomthing.py /var/
+COPY ./app/tweetsomthing.py ./
 COPY ./requirements.txt ./
 
 RUN apt-get install -y vim less
@@ -20,4 +20,4 @@ RUN pip3 install --upgrade pip
 RUN pip3 install --upgrade setuptools
 
 RUN pip3 install -r requirements.txt
-CMD ["/usr/bin/python3", "/var/tweetsomething.py"]
+CMD ["/usr/bin/python3", "./tweetsomething.py"]
